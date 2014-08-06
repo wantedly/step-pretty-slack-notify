@@ -1,0 +1,5 @@
+box: wercker/rvm
+build:
+  steps:
+    - wercker/bundle-install@1.1.1
+    - validate-wercker-step

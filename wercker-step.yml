@@ -1,0 +1,8 @@
+name: slack-pretty-notify
+version: 0.0.1
+description: Post a build notification to a channel
+keywords:
+  - notification
+  - slack
+  - webhook
+properties:
