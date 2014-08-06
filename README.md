@@ -1,5 +1,5 @@
 # Slack Notify Step
-A wercker step to notify build status to [Slack Channel](https://slack.com/).
+Posts wercker build/deploy status to a [Slack Channel](https://slack.com/).
 
 ## REQUIREMENTS
 
