@@ -38,13 +38,13 @@ end
 notifier = Slack::Notifier.new(
   team,
   token,
-  channel: channel,
+  channel: "##{channel}",
 )
 
 res = notifier.ping(
   message(app_name, app_url, build_url, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"]),
   icon_url: icon_url(ENV["WERCKER_RESULT"]),
-  username: username_with_status(username, ENV["WERCKER_RESULT"])
+  username: username_with_status(username, ENV["WERCKER_RESULT"]),
 )
 
 case res.code
