@@ -6,3 +6,15 @@ keywords:
   - slack
   - webhook
 properties:
+  team:
+    type: string
+    required: true
+  token:
+    type: string
+    required: true
+  channel:
+    type: string
+    required: true
+  username:
+    type: string
+    required: false
