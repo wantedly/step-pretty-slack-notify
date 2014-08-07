@@ -6,10 +6,10 @@ require "dotenv"
 # Using dotenv for debug in local
 Dotenv.load
 
-team     = ENV["WERCKER_SLACK_NOTIFY_TEAM"]
-token    = ENV["WERCKER_SLACK_NOTIFY_TOKEN"]
-channel  = ENV["WERCKER_SLACK_NOTIFY_CHANNEL"]
-username = ENV["WERCKER_SLACK_NOTIFY_USERNAME"]
+team     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_TEAM"]
+token    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_TOKEN"]
+channel  = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]
+username = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]
 
 abort "Please specify the your slack team"    unless team
 abort "Please specify the your slack token"   unless token
