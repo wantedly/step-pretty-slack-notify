@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
 require "slack-notifier"
-require "dotenv"
 
 # Using dotenv for debug in local
-Dotenv.load
+#require "dotenv"
+#Dotenv.load
 
 team     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_TEAM"]
 token    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_TOKEN"]
@@ -43,14 +43,14 @@ notifier = Slack::Notifier.new(
   channel: "##{channel}",
 )
 
-res = notifier.ping(
-  message(app_name, app_url, build_url, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"]),
-  icon_url: icon_url(ENV["WERCKER_RESULT"]),
-  username: username_with_status(username, ENV["WERCKER_RESULT"]),
-)
-
-case res.code
-when "404" then abort "Subdomain or token not found."
-when "500" then abort res.read_body
-else puts "Notified to Slack #{channel}"
-end
+#res = notifier.ping(
+#  message(app_name, app_url, build_url, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"]),
+#  icon_url: icon_url(ENV["WERCKER_RESULT"]),
+#  username: username_with_status(username, ENV["WERCKER_RESULT"]),
+#)
+#
+#case res.code
+#when "404" then abort "Subdomain or token not found."
+#when "500" then abort res.read_body
+#else puts "Notified to Slack #{channel}"
+#end
