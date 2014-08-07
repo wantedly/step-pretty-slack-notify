@@ -18,7 +18,9 @@ username = "Wercker"                          unless username
 
 # See for more details about environment variables that we can use in our steps
 # http://devcenter.wercker.com/articles/steps/variables.html
-app_name   = ENV["WERCKER_APPLICATION_NAME"]
+git_owner  = ENV["WERCKER_GIT_OWNER"]
+git_repo   = ENV["WERCKER_GIT_REPOSITORY"]
+app_name   = "#{git_owner}/#{git_repo}"
 app_url    = ENV["WERCKER_APPLICATION_URL"]
 build_url  = ENV["WERCKER_BUILD_URL"]
 git_commit = ENV["WERCKER_GIT_COMMIT"]
