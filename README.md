@@ -18,7 +18,7 @@ build:
     after-steps:
         - wantedly/pretty-slack-notify:
             team: mycompany
-            token: $SLACK_TOKEN
+            token: $SLACK_API_TOKEN
             channel: dev
             username: cibot
 ```
