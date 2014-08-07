@@ -1,1 +1,1 @@
-ruby $WERCKER_STEP_ROOT/run.rb
+$WERCKER_STEP_ROOT/run.rb
