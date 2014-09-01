@@ -13,5 +13,3 @@ else
   echo "You need to use a box that installed ruby."
 fi
 $WERCKER_STEP_ROOT/run.rb
-
-exit 0
