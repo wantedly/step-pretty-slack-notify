@@ -54,5 +54,5 @@ res = notifier.ping(
 case res.code
 when "404" then abort "Subdomain or token not found."
 when "500" then abort res.read_body
-else puts "Notified to Slack #{channel}"
+else puts "Notified to Slack ##{channel}"
 end
