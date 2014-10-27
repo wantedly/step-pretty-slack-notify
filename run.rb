@@ -27,8 +27,16 @@ git_commit = ENV["WERCKER_GIT_COMMIT"]
 git_branch = ENV["WERCKER_GIT_BRANCH"]
 started_by = ENV["WERCKER_STARTED_BY"]
 
-def message(app_name, app_url, build_url, git_commit, git_branch, started_by, status)
+deploy = ENV["DEPLOY"] == "true"
+deploy_url = ENV["WERCKER_DEPLOY_URL"]
+deploytarget_name = ENV["WERCKER_DEPLOYTARGET_NAME"]
+
+def build_message(app_name, app_url, build_url, git_commit, git_branch, started_by, status)
   "[[#{app_name}](#{app_url})] [build(#{git_commit[0,8]})](#{build_url}) of #{git_branch} by #{started_by} #{status}"
+end
+
+def deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit, git_branch, started_by, status)
+  "[[#{app_name}](#{app_url})] [deploy(#{git_commit[0,8]})](#{deploy_url}) of #{git_branch} to #{deploytarget_name} by #{started_by} #{status}"
 end
 
 def icon_url(status)
@@ -45,8 +53,12 @@ notifier = Slack::Notifier.new(
   channel: "##{channel}",
 )
 
+message = deploy ?
+  deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"]) :
+  build_message(app_name, app_url, build_url, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"])
+
 res = notifier.ping(
-  message(app_name, app_url, build_url, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"]),
+  message,
   icon_url: icon_url(ENV["WERCKER_RESULT"]),
   username: username_with_status(username, ENV["WERCKER_RESULT"]),
 )
