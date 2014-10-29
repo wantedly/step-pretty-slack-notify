@@ -27,9 +27,11 @@ git_commit = ENV["WERCKER_GIT_COMMIT"]
 git_branch = ENV["WERCKER_GIT_BRANCH"]
 started_by = ENV["WERCKER_STARTED_BY"]
 
-deploy = ENV["DEPLOY"] == "true"
 deploy_url = ENV["WERCKER_DEPLOY_URL"]
 deploytarget_name = ENV["WERCKER_DEPLOYTARGET_NAME"]
+def deploy?
+  ENV["DEPLOY"] == "true"
+end
 
 def build_message(app_name, app_url, build_url, git_commit, git_branch, started_by, status)
   "[[#{app_name}](#{app_url})] [build(#{git_commit[0,8]})](#{build_url}) of #{git_branch} by #{started_by} #{status}"
@@ -53,7 +55,7 @@ notifier = Slack::Notifier.new(
   channel: "##{channel}",
 )
 
-message = deploy ?
+message = deploy? ?
   deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"]) :
   build_message(app_name, app_url, build_url, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"])
 
