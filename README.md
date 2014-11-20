@@ -5,8 +5,7 @@ Posts wercker build/deploy status to a [Slack Channel](https://slack.com/).
 
 ## REQUIREMENTS
 
-* `team` - Your Slack team subdomain.
-* `token` - Your Slack integration token.
+* `webhook` - Your custom Slack webhook URL.
 * `channel` - The Slack channel you want to send message for. (without #).
 
 Options
@@ -19,8 +18,7 @@ Options
 build:
     after-steps:
         - wantedly/pretty-slack-notify:
-            team: mycompany
-            token: $SLACK_API_TOKEN
+            webhook: $SLACK_WEBHOOK_URL
             channel: dev
             username: cibot
 ```
@@ -28,8 +26,7 @@ build:
 deploy:
     after-steps:
         - wantedly/pretty-slack-notify:
-            team: mycompany
-            token: $SLACK_API_TOKEN
+            webhook: $SLACK_WEBHOOK_URL
             channel: dev
             username: cibot
 ```
