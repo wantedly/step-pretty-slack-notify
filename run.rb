@@ -6,14 +6,12 @@ require "slack-notifier"
 #require "dotenv"
 #Dotenv.load
 
-team     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_TEAM"]
-token    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_TOKEN"]
-channel  = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]
-username = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]
+webhook_url = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK"]
+channel     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]
+username    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]
 
-abort "Please specify the your slack team"    unless team
-abort "Please specify the your slack token"   unless token
-abort "Please specify the your slack channel" unless channel
+abort "Please specify your slack webhook URL" unless webhook
+abort "Please specify your slack channel"     unless channel
 username = "Wercker"                          unless username
 
 # See for more details about environment variables that we can use in our steps
@@ -50,8 +48,7 @@ def username_with_status(username, status)
 end
 
 notifier = Slack::Notifier.new(
-  team,
-  token,
+  webhook_url
   channel: "##{channel}",
 )
 
@@ -66,7 +63,7 @@ res = notifier.ping(
 )
 
 case res.code
-when "404" then abort "Subdomain or token not found."
+when "404" then abort "Webhook url not found."
 when "500" then abort res.read_body
 else puts "Notified to Slack ##{channel}"
 end

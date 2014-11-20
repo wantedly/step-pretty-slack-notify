@@ -1,6 +1,6 @@
 GEM
   specs:
-    slack-notifier (0.5.0)
+    slack-notifier (1.0.0)
 
 PLATFORMS
   ruby
