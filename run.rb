@@ -6,11 +6,12 @@ require "slack-notifier"
 #require "dotenv"
 #Dotenv.load
 
-webhook = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK"]
-username = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]
+webhook_url = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK_URL"]
+channel     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]
+username    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]
 
-abort "Please specify the your slack webhook"    unless webhook
-username = "Wercker"                          unless username
+abort "Please specify the your slack webhook url" unless webhook_url
+username = "Wercker"                              unless username
 
 # See for more details about environment variables that we can use in our steps
 # http://devcenter.wercker.com/articles/steps/variables.html
@@ -23,8 +24,9 @@ git_commit = ENV["WERCKER_GIT_COMMIT"]
 git_branch = ENV["WERCKER_GIT_BRANCH"]
 started_by = ENV["WERCKER_STARTED_BY"]
 
-deploy_url = ENV["WERCKER_DEPLOY_URL"]
+deploy_url        = ENV["WERCKER_DEPLOY_URL"]
 deploytarget_name = ENV["WERCKER_DEPLOYTARGET_NAME"]
+
 def deploy?
   ENV["DEPLOY"] == "true"
 end
@@ -46,7 +48,7 @@ def username_with_status(username, status)
 end
 
 notifier = Slack::Notifier.new(
-  webhook,
+  webhook_url,
   username: username_with_status(username, ENV["WERCKER_RESULT"])
 )
 
@@ -54,13 +56,15 @@ message = deploy? ?
   deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"]) :
   build_message(app_name, app_url, build_url, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"])
 
+notifier.channel = '#' + channel if channel
+
 res = notifier.ping(
   message,
   icon_url: icon_url(ENV["WERCKER_RESULT"])
 )
 
 case res.code
-when "404" then abort "Subdomain or token not found."
+when "404" then abort "Webhook url not found."
 when "500" then abort res.read_body
-else puts "Notified to Slack"
+else puts "Notified to Slack #{notifier.channel}"
 end
