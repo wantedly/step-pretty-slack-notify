@@ -7,6 +7,7 @@ require "slack-notifier"
 #Dotenv.load
 
 webhook_url = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK_URL"]
+channel     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]
 username    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]
 
 abort "Please specify the your slack webhook url" unless webhook_url
@@ -55,6 +56,8 @@ message = deploy? ?
   deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"]) :
   build_message(app_name, app_url, build_url, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"])
 
+notifier.channel = '#' + channel if channel
+
 res = notifier.ping(
   message,
   icon_url: icon_url(ENV["WERCKER_RESULT"])
@@ -63,5 +66,5 @@ res = notifier.ping(
 case res.code
 when "404" then abort "Webhook url not found."
 when "500" then abort res.read_body
-else puts "Notified to Slack"
+else puts "Notified to Slack #{notifier.channel}"
 end

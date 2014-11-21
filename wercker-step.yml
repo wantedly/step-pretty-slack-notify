@@ -9,6 +9,9 @@ properties:
   webhook_url:
     type: string
     required: true
+  channel:
+    type: string
+    required: false
   username:
     type: string
     required: false

@@ -9,23 +9,36 @@ Posts wercker build/deploy status to a [Slack Channel](https://slack.com/).
 
 Options
 
+* `channel`  - The Slack channel to override the channel webhook has. (without #).
 * `username` - The name of your bot. (default `Wercker`)
 
 ## EXAMPLE USAGE
+posts build notification
 
 ```yml
 build:
     after-steps:
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
-            username: cibot
 ```
+
+posts deploy notification
 
 ```yml
 deploy:
     after-steps:
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
+```
+
+override channel and/or username
+
+```yml
+build:
+    after-steps:
+        - wantedly/pretty-slack-notify:
+            webhook_url: $SLACK_WEBHOOK_URL
+            channel: dev
             username: cibot
 ```
 
