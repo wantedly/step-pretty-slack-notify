@@ -5,7 +5,7 @@ Posts wercker build/deploy status to a [Slack Channel](https://slack.com/).
 
 ## REQUIREMENTS
 
-* `webhook` - Your Slack webhook URL.
+* `webhook_url` - Your Slack webhook URL.
 
 Options
 
@@ -17,14 +17,15 @@ Options
 build:
     after-steps:
         - wantedly/pretty-slack-notify:
-            webhook: $SLACK_WEBHOOK
+            webhook_url: $SLACK_WEBHOOK_URL
             username: cibot
 ```
+
 ```yml
 deploy:
     after-steps:
         - wantedly/pretty-slack-notify:
-            webhook: $SLACK_WEBHOOK
+            webhook_url: $SLACK_WEBHOOK_URL
             username: cibot
 ```
 

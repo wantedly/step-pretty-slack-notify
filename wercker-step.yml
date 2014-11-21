@@ -6,7 +6,7 @@ keywords:
   - slack
   - webhook
 properties:
-  webhook:
+  webhook_url:
     type: string
     required: true
   username:
