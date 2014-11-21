@@ -6,14 +6,10 @@ require "slack-notifier"
 #require "dotenv"
 #Dotenv.load
 
-team     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_TEAM"]
-token    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_TOKEN"]
-channel  = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]
+webhook = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK"]
 username = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]
 
-abort "Please specify the your slack team"    unless team
-abort "Please specify the your slack token"   unless token
-abort "Please specify the your slack channel" unless channel
+abort "Please specify the your slack webhook"    unless webhook
 username = "Wercker"                          unless username
 
 # See for more details about environment variables that we can use in our steps
@@ -42,7 +38,7 @@ def deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit,
 end
 
 def icon_url(status)
-  "https://raw.githubusercontent.com/wantedly/step-pretty-slack-notify/master/icons/#{status}.jpg"
+  "https://github.com/wantedly/step-pretty-slack-notify/raw/master/icons/#{status}.jpg"
 end
 
 def username_with_status(username, status)
@@ -50,9 +46,8 @@ def username_with_status(username, status)
 end
 
 notifier = Slack::Notifier.new(
-  team,
-  token,
-  channel: "##{channel}",
+  webhook,
+  username: username_with_status(username, ENV["WERCKER_RESULT"])
 )
 
 message = deploy? ?
@@ -61,12 +56,11 @@ message = deploy? ?
 
 res = notifier.ping(
   message,
-  icon_url: icon_url(ENV["WERCKER_RESULT"]),
-  username: username_with_status(username, ENV["WERCKER_RESULT"]),
+  icon_url: icon_url(ENV["WERCKER_RESULT"])
 )
 
 case res.code
 when "404" then abort "Subdomain or token not found."
 when "500" then abort res.read_body
-else puts "Notified to Slack ##{channel}"
+else puts "Notified to Slack"
 end
