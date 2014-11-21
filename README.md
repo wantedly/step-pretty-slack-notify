@@ -9,7 +9,7 @@ Posts wercker build/deploy status to a [Slack Channel](https://slack.com/).
 
 Options
 
-* `channel`  - The Slack channel to override the channel webhook has. (without #).
+* `channel`  - The Slack channel to override the default channel. (without #).
 * `username` - The name of your bot. (default `Wercker`)
 
 ## EXAMPLE USAGE
