@@ -9,9 +9,9 @@ if which ruby> /dev/null; then
   RUBY_PATH=$(which ruby)
   RUBY_OWNER=$(ls -l "${RUBY_PATH}" | tr -s ' ' | cut -d ' ' -f 3)
 
-  echo "Ruby Version:    $(ruby -v)"
-  echo "Ruby Path:       ${RUBY_PATH}"
-  echo "Install User:    ${CURRENT_USER}"
+  echo "Ruby Version: $(ruby -v)"
+  echo "Ruby Path: ${RUBY_PATH}"
+  echo "Install User: ${CURRENT_USER}"
   echo ""
 
 
@@ -24,7 +24,6 @@ if which ruby> /dev/null; then
   fi
 
   $WERCKER_STEP_ROOT/run.rb
-  exit 0
 else
   echo "You need to use a box that installed ruby."
   exit 1
