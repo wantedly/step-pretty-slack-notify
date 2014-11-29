@@ -4,15 +4,16 @@
 # If step using rvm/rbenv ruby, it shouldn't install gem as root.
 # See https://github.com/wantedly/step-pretty-slack-notify/issues/1
 
-CURRENT_USER=$(whoami)
-RUBY_PATH=$(which ruby)
-RUBY_OWNER=$(ls -l "${RUBY_PATH}" | tr -s ' ' | cut -d ' ' -f 3)
-
 if which ruby> /dev/null; then
+  CURRENT_USER=$(whoami)
+  RUBY_PATH=$(which ruby)
+  RUBY_OWNER=$(ls -l "${RUBY_PATH}" | tr -s ' ' | cut -d ' ' -f 3)
+
   echo "Ruby Version:    $(ruby -v)"
   echo "Ruby Path:       ${RUBY_PATH}"
   echo "Install User:    ${CURRENT_USER}"
   echo ""
+
 
   if [ "${CURRENT_USER}" = "${RUBY_OWNER}" ]; then
     echo "Installing slack-notifier..."
