@@ -4,7 +4,7 @@
 # If step using rvm/rbenv ruby, it shouldn't install gem as root.
 # See https://github.com/wantedly/step-pretty-slack-notify/issues/1
 
-if which ruby> /dev/null; then
+if which ruby > /dev/null 2>&1 ; then
   CURRENT_USER=$(whoami)
   RUBY_PATH=$(which ruby)
   RUBY_OWNER=$(ls -l "${RUBY_PATH}" | tr -s ' ' | cut -d ' ' -f 3)
@@ -25,6 +25,15 @@ if which ruby> /dev/null; then
 
   $WERCKER_STEP_ROOT/run.rb
 else
-  echo "You need to use a box that installed ruby."
-  exit 1
+  # Support Docker Box
+  if which docker > /dev/null 2>&1 ; then
+    echo "Docker Version: $(docker -v)"
+    echo ""
+
+    script/run
+  # No ruby, no docker case
+  else
+    echo "You need to use a box that installed ruby."
+    exit 1
+  fi
 fi

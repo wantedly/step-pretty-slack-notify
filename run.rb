@@ -2,10 +2,6 @@
 
 require "slack-notifier"
 
-# Using dotenv for debug in local
-#require "dotenv"
-#Dotenv.load
-
 webhook_url = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK_URL"]
 channel     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]
 username    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]

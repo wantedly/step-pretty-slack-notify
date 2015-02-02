@@ -1,0 +1,9 @@
+.git/*
+.gitignore
+README.md
+CHANGELOG.md
+LICENSE
+wercker-step.yml
+wercker.yml
+coreos/*
+script/*

@@ -1,4 +1,4 @@
-# Slack Notify Step
+# Slack Notify Step [![Docker Repository on Quay.io](https://quay.io/repository/wantedly/pretty-slack-notify/status "Docker Repository on Quay.io")](https://quay.io/repository/wantedly/pretty-slack-notify)
 Posts wercker build/deploy status to a [Slack Channel](https://slack.com/).
 
 ![screenshot](https://raw.githubusercontent.com/wantedly/step-pretty-slack-notify/master/screenshot.png)
