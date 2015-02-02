@@ -1,3 +1,9 @@
+## 0.2.7 (2015-02-02)
+
+Bugs Fixed
+
+* `no such file or directory` error on wercker-labs/docker box
+
 ## 0.2.5 (2015-02-02)
 
 New Features:

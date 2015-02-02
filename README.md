@@ -42,3 +42,5 @@ build:
             username: cibot
 ```
 
+## CHANGELOG
+See [CHANGELOG](CHANGELOG.md)

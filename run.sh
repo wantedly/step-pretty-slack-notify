@@ -30,7 +30,7 @@ else
     echo "Docker Version: $(docker -v)"
     echo ""
 
-    script/run
+    $WERCKER_STEP_ROOT/script/run
   # No ruby, no docker case
   else
     echo "You need to use a box that installed ruby."

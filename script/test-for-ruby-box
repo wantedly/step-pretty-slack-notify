@@ -5,6 +5,7 @@
 
 set -e
 
+IFS=$'\n'
 echo "==> Loading environment variables ..."
 for line in `cat .env | grep -v ^# | grep -v "^ *#"`
 do
