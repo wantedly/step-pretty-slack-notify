@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# Usage: script/test
+#
+
+set -e
+
+script/build
+
+echo "==> Loading environment variables ..."
+for line in `cat .env | grep -v ^# | grep -v "^ *#"`
+do
+  if [ -z "${line}" ]
+  then
+    continue
+  else
+    export ${line}
+  fi
+done
+
+script/run
+
+if test $? -eq 0
+then
+  echo ""
+  echo "   Test Passed"
+else
+  echo ""
+  echo "   Test Failed"
+  exit 1
+fi
