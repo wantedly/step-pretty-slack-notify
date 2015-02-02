@@ -3,6 +3,7 @@
 New Features:
 
 * Supports Docker Box
+* Add test scripts to help developing the step: `script/test-for-ruby-box` and `script/test-for-docker-box`
 
 Changes:
 
