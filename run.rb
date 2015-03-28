@@ -5,6 +5,7 @@ require "slack-notifier"
 webhook_url = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK_URL"]
 channel     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]
 username    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]
+branches    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_BRANCHES"]
 
 abort "Please specify the your slack webhook url" unless webhook_url
 username = "Wercker"                              unless username
@@ -22,6 +23,12 @@ started_by = ENV["WERCKER_STARTED_BY"]
 
 deploy_url        = ENV["WERCKER_DEPLOY_URL"]
 deploytarget_name = ENV["WERCKER_DEPLOYTARGET_NAME"]
+
+if branches && Regexp.new(branches) !~ git_branch
+  puts "'#{git_branch}' branch did not match notify branches /#{branches}/"
+  puts "Skipped to notify"
+  exit
+end
 
 def deploy?
   ENV["DEPLOY"] == "true"
