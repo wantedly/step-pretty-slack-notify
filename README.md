@@ -50,7 +50,7 @@ build:
     after-steps:
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
-            branches: master
+            branches: ^master$
 ```
 
 ## CHANGELOG
