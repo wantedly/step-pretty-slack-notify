@@ -16,3 +16,6 @@ properties:
   username:
     type: string
     required: false
+  branches:
+    type: string
+    required: false

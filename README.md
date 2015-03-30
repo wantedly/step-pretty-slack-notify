@@ -11,6 +11,7 @@ Options
 
 * `channel`  - The Slack channel to override the default channel. (without #).
 * `username` - The name of your bot. (default `Wercker`)
+* `branches` - Specific branches to notify. (regular expression)
 
 ## EXAMPLE USAGE
 posts build notification
@@ -40,6 +41,16 @@ build:
             webhook_url: $SLACK_WEBHOOK_URL
             channel: dev
             username: cibot
+```
+
+notify on specific branches only
+
+```yml
+build:
+    after-steps:
+        - wantedly/pretty-slack-notify:
+            webhook_url: $SLACK_WEBHOOK_URL
+            branches: ^master$
 ```
 
 ## CHANGELOG
