@@ -1,3 +1,12 @@
+## 0.2.9 (2015-06-07)
+New Features:
+
+* Lightweight docker image (803.4MB -> 151.6MB)
+
+Changes:
+
+* Use ruby2.1.5
+
 ## 0.2.8 (2015-03-30)
 
 New Features:
