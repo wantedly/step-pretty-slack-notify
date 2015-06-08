@@ -1,5 +1,11 @@
-FROM quay.io/wantedly/ruby:2.2.0
+FROM debian:jessie
 MAINTAINER Seigo Uchida <spesnova@gmail.com> (@spesnova)
+
+# Install ruby 2.1.5
+RUN apt-get update && \
+    apt-get install -y ruby && \
+    rm -rf /var/lib/apt/lists/* && \
+    gem install bundler --no-ri --no-rdoc
 
 WORKDIR /app
 

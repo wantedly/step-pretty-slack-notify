@@ -25,4 +25,4 @@ docker run \
   -e WERCKER_DEPLOY_URL="${WERCKER_DEPLOY_URL}" \
   -e WERCKER_DEPLOYTARGET_NAME="${WERCKER_DEPLOYTARGET_NAME}" \
   -e WERCKER_RESULT="${WERCKER_RESULT}" \
-  quay.io/wantedly/pretty-slack-notify
+  quay.io/wantedly/pretty-slack-notify:latest
