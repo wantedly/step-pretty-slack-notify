@@ -17,10 +17,10 @@ if which ruby > /dev/null 2>&1 ; then
 
   if [ "${CURRENT_USER}" = "${RUBY_OWNER}" ]; then
     echo "Installing slack-notifier..."
-         gem install slack-notifier -v 1.0.0 --no-ri --no-rdoc
+         gem install slack-notifier -v 1.2.1 --no-ri --no-rdoc
   else
     echo "Installing slack-notifier as root..."
-    sudo gem install slack-notifier -v 1.0.0 --no-ri --no-rdoc
+    sudo gem install slack-notifier -v 1.2.1 --no-ri --no-rdoc
   fi
 
   $WERCKER_STEP_ROOT/run.rb
