@@ -1,3 +1,8 @@
+## 0.2.10 (2015-06-20)
+Changes:
+
+* Updated slack-notifier to 1.2.1 [#16](https://github.com/wantedly/step-pretty-slack-notify/pull/16)
+
 ## 0.2.9 (2015-06-07)
 New Features:
 
