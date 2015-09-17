@@ -1,3 +1,8 @@
+## 0.2.11 (2015-09-17)
+New Features:
+
+* Add A flag `notify_on` that allows you to specify whether to notify on failures only [#17](https://github.com/wantedly/step-pretty-slack-notify/issues/17)
+
 ## 0.2.10 (2015-06-20)
 Changes:
 
