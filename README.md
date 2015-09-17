@@ -12,6 +12,7 @@ Options
 * `channel`  - The Slack channel to override the default channel. (without #).
 * `username` - The name of your bot. (default `Wercker`)
 * `branches` - Specific branches to notify. (regular expression)
+* `notify_on` - Allows you to specify whether to notify on failures only
 
 ## EXAMPLE USAGE
 posts build notification
@@ -51,6 +52,16 @@ build:
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
             branches: ^master$
+```
+
+notify on specific failed only
+
+```yml
+build:
+    after-steps:
+        - wantedly/pretty-slack-notify:
+            webhook_url: $SLACK_WEBHOOK_URL
+            notify_on: "failed"
 ```
 
 ## CHANGELOG
