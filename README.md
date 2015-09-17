@@ -12,7 +12,7 @@ Options
 * `channel`  - The Slack channel to override the default channel. (without #).
 * `username` - The name of your bot. (default `Wercker`)
 * `branches` - Specific branches to notify. (regular expression)
-* `notify_on` - Allows you to specify whether to notify on failures only
+* `notify_on` - Allows you to specify to notify on `passed` or `failed`. (default all allows notify)
 
 ## EXAMPLE USAGE
 posts build notification
