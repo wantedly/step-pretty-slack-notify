@@ -1,3 +1,8 @@
+## 0.2.13 (2015-12-03)
+Bugs Fixed:
+
+* Modify environment variable of notify_on correctly [#23](https://github.com/wantedly/step-pretty-slack-notify/pull/23)
+
 ## 0.2.12 (2015-12-03)
 Bugs Fixed:
 
