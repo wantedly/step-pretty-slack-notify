@@ -19,3 +19,6 @@ properties:
   branches:
     type: string
     required: false
+  notify_on:
+    type: string
+    required: false
