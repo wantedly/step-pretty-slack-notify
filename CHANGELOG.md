@@ -1,3 +1,8 @@
+## 0.2.12 (2015-12-03)
+Bugs Fixed:
+
+* `notify_on` was not working correctly [#22](https://github.com/wantedly/step-pretty-slack-notify/pull/22)
+
 ## 0.2.11 (2015-09-17)
 New Features:
 
