@@ -2,13 +2,13 @@
 
 require "slack-notifier"
 
-webhook_url = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK_URL"]
-channel     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]
-username    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]
-branches    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_BRANCHES"]
-notify_on   = ENV["WERCKER_PRETTY_SLACK_NOTIFY_NOTIFY_ON"] || ""
-abort "Please specify the your slack webhook url" unless webhook_url
-username = "Wercker"                              unless username
+webhook_url = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK_URL"] || ""
+channel     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]     || ""
+username    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]    || ""
+branches    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_BRANCHES"]    || ""
+notify_on   = ENV["WERCKER_PRETTY_SLACK_NOTIFY_NOTIFY_ON"]   || ""
+abort "Please specify the your slack webhook url" if webhook_url.empty?
+username = "Wercker"                              if username.empty?
 
 # See for more details about environment variables that we can use in our steps
 # http://devcenter.wercker.com/articles/steps/variables.html
@@ -24,7 +24,7 @@ started_by = ENV["WERCKER_STARTED_BY"]
 deploy_url        = ENV["WERCKER_DEPLOY_URL"]
 deploytarget_name = ENV["WERCKER_DEPLOYTARGET_NAME"]
 
-if branches && Regexp.new(branches) !~ git_branch
+if !branches.empty? && Regexp.new(branches) !~ git_branch
   puts "'#{git_branch}' branch did not match notify branches /#{branches}/"
   puts "Skipped to notify"
   exit
@@ -59,7 +59,7 @@ message = deploy? ?
   deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"]) :
   build_message(app_name, app_url, build_url, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"])
 
-notifier.channel = '#' + channel if channel
+notifier.channel = '#' + channel unless channel.empty?
 
 if notify_on.empty? || notify_on == ENV["WERCKER_RESULT"]
   res = notifier.ping(
