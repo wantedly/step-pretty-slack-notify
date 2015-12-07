@@ -1,3 +1,9 @@
+## 0.2.14 (2015-12-07)
+Bugs Fixed:
+
+* Use empty string for default value of environment variables [#26](https://github.com/wantedly/step-pretty-slack-notify/pull/26)
+* Skip notifying if notify_on condition does not match [#25](https://github.com/wantedly/step-pretty-slack-notify/pull/25)
+
 ## 0.2.13 (2015-12-03)
 Bugs Fixed:
 
