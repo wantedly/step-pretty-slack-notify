@@ -30,6 +30,12 @@ if !branches.empty? && Regexp.new(branches) !~ git_branch
   exit
 end
 
+unless notify_on.empty? || notify_on == ENV["WERCKER_RESULT"]
+  puts "Result '#{ENV["WERCKER_RESULT"]}' did not match notify condition '#{notify_on}'"
+  puts "Skipped to notify"
+  exit
+end
+
 def deploy?
   ENV["DEPLOY"] == "true"
 end
@@ -61,12 +67,10 @@ message = deploy? ?
 
 notifier.channel = '#' + channel unless channel.empty?
 
-if notify_on.empty? || notify_on == ENV["WERCKER_RESULT"]
-  res = notifier.ping(
-    message,
-    icon_url: icon_url(ENV["WERCKER_RESULT"])
-  )
-end
+res = notifier.ping(
+  message,
+  icon_url: icon_url(ENV["WERCKER_RESULT"])
+)
 
 case res.code
 when "404" then abort "Webhook url not found."
