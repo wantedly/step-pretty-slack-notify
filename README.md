@@ -20,6 +20,8 @@ posts build notification
 ```yml
 build:
     after-steps:
+        - install-packages:
+            packages: ruby
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
 ```
@@ -29,6 +31,8 @@ posts deploy notification
 ```yml
 deploy:
     after-steps:
+        - install-packages:
+            packages: ruby
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
 ```
@@ -38,6 +42,8 @@ override channel and/or username
 ```yml
 build:
     after-steps:
+        - install-packages:
+            packages: ruby
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
             channel: dev
@@ -49,6 +55,8 @@ notify on specific branches only
 ```yml
 build:
     after-steps:
+        - install-packages:
+            packages: ruby
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
             branches: ^master$
@@ -59,6 +67,8 @@ notify on specific failed only
 ```yml
 build:
     after-steps:
+        - install-packages:
+            packages: ruby
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
             notify_on: "failed"
