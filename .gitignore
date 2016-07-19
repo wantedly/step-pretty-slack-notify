@@ -39,3 +39,5 @@ build/
 ## Vagrant
 .vagrant
 user-data
+
+.ruby-version
