@@ -24,7 +24,7 @@ started_by = ENV["WERCKER_STARTED_BY"]
 deploy_url        = ENV["WERCKER_DEPLOY_URL"]
 deploytarget_name = ENV["WERCKER_DEPLOYTARGET_NAME"]
 
-if !branches.empty? && Regexp.new(branches) !~ git_branch
+if !branches.empty? && Regexp.new(branches) === git_branch
   puts "'#{git_branch}' branch did not match notify branches /#{branches}/"
   puts "Skipped to notify"
   exit
