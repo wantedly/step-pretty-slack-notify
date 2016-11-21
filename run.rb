@@ -40,25 +40,25 @@ def deploy?
   ENV["DEPLOY"] == "true"
 end
 
-def build_message(app_name, app_url, build_url, git_commit, git_branch, started_by, status)
-  "[[#{app_name}](#{app_url})] [build(#{git_commit[0,8]})](#{build_url}) of #{git_branch} by #{started_by} #{status}"
+def build_message(app_name, app_url, build_url, git_commit, git_branch, started_by, result)
+  "[[#{app_name}](#{app_url})] [build(#{git_commit[0,8]})](#{build_url}) of #{git_branch} by #{started_by} #{result}"
 end
 
-def deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit, git_branch, started_by, status)
-  "[[#{app_name}](#{app_url})] [deploy(#{git_commit[0,8]})](#{deploy_url}) of #{git_branch} to #{deploytarget_name} by #{started_by} #{status}"
+def deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit, git_branch, started_by, result)
+  "[[#{app_name}](#{app_url})] [deploy(#{git_commit[0,8]})](#{deploy_url}) of #{git_branch} to #{deploytarget_name} by #{started_by} #{result}"
 end
 
-def icon_url(status)
-  "https://github.com/wantedly/step-pretty-slack-notify/raw/master/icons/#{status}.jpg"
+def icon_url(result)
+  "https://github.com/wantedly/step-pretty-slack-notify/raw/master/icons/#{result}.jpg"
 end
 
-def username_with_status(username, status)
-  "#{username} #{status.capitalize}"
+def username_with_result(username, result)
+  "#{username} #{result.capitalize}"
 end
 
 notifier = Slack::Notifier.new(
   webhook_url,
-  username: username_with_status(username, ENV["WERCKER_RESULT"])
+  username: username_with_result(username, ENV["WERCKER_RESULT"])
 )
 
 message = deploy? ?
