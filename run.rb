@@ -52,13 +52,9 @@ def icon_url
   "https://secure.gravatar.com/avatar/a08fc43441db4c2df2cef96e0cc8c045?s=140"
 end
 
-def username_with_result(username, result)
-  "#{username} #{result.capitalize}"
-end
-
 notifier = Slack::Notifier.new(
   webhook_url,
-  username: username_with_result(username, ENV["WERCKER_RESULT"])
+  username: username,
 )
 
 message = deploy? ?
