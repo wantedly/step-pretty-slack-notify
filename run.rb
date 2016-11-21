@@ -48,8 +48,8 @@ def deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit,
   "[[#{app_name}](#{app_url})] [deploy(#{git_commit[0,8]})](#{deploy_url}) of #{git_branch} to #{deploytarget_name} by #{started_by} #{result}"
 end
 
-def icon_url(result)
-  "https://github.com/wantedly/step-pretty-slack-notify/raw/master/icons/#{result}.jpg"
+def icon_url
+  "https://secure.gravatar.com/avatar/a08fc43441db4c2df2cef96e0cc8c045?s=140"
 end
 
 def username_with_result(username, result)
@@ -69,7 +69,7 @@ notifier.channel = '#' + channel unless channel.empty?
 
 res = notifier.ping(
   message,
-  icon_url: icon_url(ENV["WERCKER_RESULT"])
+  icon_url: icon_url,
 )
 
 case res.code
