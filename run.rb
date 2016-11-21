@@ -63,8 +63,9 @@ class Build
 end
 
 class Message
-  def initialize(build)
+  def initialize(build, custom_message=nil)
     @build = build
+    @custom_message = custom_message
   end
 
   def text
@@ -77,6 +78,10 @@ class Message
       message += " on #{@build.git_branch}([#{@build.git_commit[0,8]}](#{@build.git_commit_url}))"
     else
       message += " on #{@build.git_branch}(#{@build.git_commit[0,8]})"
+    end
+
+    if @custom_message
+      message += "\n#{@custom_message}"
     end
   end
 
@@ -101,12 +106,14 @@ end
 # Main
 #
 # These environment variables are required/optional for pretty-slack-notify step.
-webhook_url = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK_URL"] || ""
-channel     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]     || ""
-username    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]    || "Wercker"
-branches    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_BRANCHES"]    || ""
-notify_on   = ENV["WERCKER_PRETTY_SLACK_NOTIFY_NOTIFY_ON"]   || ""
-icon_url    = "https://secure.gravatar.com/avatar/a08fc43441db4c2df2cef96e0cc8c045?s=140"
+webhook_url    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK_URL"]    || ""
+channel        = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]        || ""
+username       = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]       || "Wercker"
+branches       = ENV["WERCKER_PRETTY_SLACK_NOTIFY_BRANCHES"]       || ""
+notify_on      = ENV["WERCKER_PRETTY_SLACK_NOTIFY_NOTIFY_ON"]      || ""
+passed_message = ENV["WERCKER_PRETTY_SLACK_NOTIFY_PASSED_MESSAGE"] || ""
+failed_message = ENV["WERCKER_PRETTY_SLACK_NOTIFY_FAILED_MESSAGE"] || ""
+icon_url       = "https://secure.gravatar.com/avatar/a08fc43441db4c2df2cef96e0cc8c045?s=140"
 
 abort "Please specify the your slack webhook url" if webhook_url.empty?
 
@@ -128,14 +135,16 @@ notifier = Slack::Notifier.new(webhook_url)
 notifier.username = username
 notifier.channel  = '#' + channel unless channel.empty?
 
-message = Message.new(build)
+custom_message = passed_message
+custom_message = failed_message if build.has_failed?
+message = Message.new(build, custom_message)
 
 response = notifier.ping(
   nil,
   icon_url: icon_url,
   attachments: [{
     fallback: message.fallback,
-    text: notifier.escape(message.text),
+    text: message.text,
     color: message.color,
   }]
 )
