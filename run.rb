@@ -17,7 +17,8 @@ git_owner         = ENV["WERCKER_GIT_OWNER"]
 git_repo          = ENV["WERCKER_GIT_REPOSITORY"]
 app_name          = "#{git_owner}/#{git_repo}"
 app_url           = ENV["WERCKER_APPLICATION_URL"]
-build_url         = ENV["WERCKER_BUILD_URL"]
+build_url         = ENV["WERCKER_BUILD_URL"] || ""
+run_url           = ENV["WERCKER_RUN_URL"]   || ""
 git_commit        = ENV["WERCKER_GIT_COMMIT"]
 git_branch        = ENV["WERCKER_GIT_BRANCH"]
 started_by        = ENV["WERCKER_STARTED_BY"]
@@ -35,6 +36,11 @@ unless notify_on.empty? || notify_on == result
   puts "Result '#{result}' did not match notify condition '#{notify_on}'"
   puts "Skipped to notify"
   exit
+end
+
+# Wercker's new stack uses WERCKER_RUN_URL instead of WERCKER_BUILD_URL
+if build_url.empty? && !run_url.empty?
+  build_url = run_url
 end
 
 def deploy?
