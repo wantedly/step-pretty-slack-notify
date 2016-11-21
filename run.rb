@@ -2,6 +2,7 @@
 
 require "slack-notifier"
 
+# These environment variables are required/optional for pretty-slack-notify step.
 webhook_url = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK_URL"] || ""
 channel     = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]     || ""
 username    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]    || ""
@@ -10,17 +11,17 @@ notify_on   = ENV["WERCKER_PRETTY_SLACK_NOTIFY_NOTIFY_ON"]   || ""
 abort "Please specify the your slack webhook url" if webhook_url.empty?
 username = "Wercker"                              if username.empty?
 
-# See for more details about environment variables that we can use in our steps
-# http://devcenter.wercker.com/articles/steps/variables.html
-git_owner  = ENV["WERCKER_GIT_OWNER"]
-git_repo   = ENV["WERCKER_GIT_REPOSITORY"]
-app_name   = "#{git_owner}/#{git_repo}"
-app_url    = ENV["WERCKER_APPLICATION_URL"]
-build_url  = ENV["WERCKER_BUILD_URL"]
-git_commit = ENV["WERCKER_GIT_COMMIT"]
-git_branch = ENV["WERCKER_GIT_BRANCH"]
-started_by = ENV["WERCKER_STARTED_BY"]
-
+# See for more details about environment variables that we can use in our steps.
+# http://devcenter.wercker.com/docs/environment-variables/available-env-vars
+git_owner         = ENV["WERCKER_GIT_OWNER"]
+git_repo          = ENV["WERCKER_GIT_REPOSITORY"]
+app_name          = "#{git_owner}/#{git_repo}"
+app_url           = ENV["WERCKER_APPLICATION_URL"]
+build_url         = ENV["WERCKER_BUILD_URL"]
+git_commit        = ENV["WERCKER_GIT_COMMIT"]
+git_branch        = ENV["WERCKER_GIT_BRANCH"]
+started_by        = ENV["WERCKER_STARTED_BY"]
+result            = ENV["WERCKER_RESULT"]
 deploy_url        = ENV["WERCKER_DEPLOY_URL"]
 deploytarget_name = ENV["WERCKER_DEPLOYTARGET_NAME"]
 
@@ -30,8 +31,8 @@ if !branches.empty? && Regexp.new(branches) !~ git_branch
   exit
 end
 
-unless notify_on.empty? || notify_on == ENV["WERCKER_RESULT"]
-  puts "Result '#{ENV["WERCKER_RESULT"]}' did not match notify condition '#{notify_on}'"
+unless notify_on.empty? || notify_on == result
+  puts "Result '#{result}' did not match notify condition '#{notify_on}'"
   puts "Skipped to notify"
   exit
 end
@@ -58,8 +59,8 @@ notifier = Slack::Notifier.new(
 )
 
 message = deploy? ?
-  deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"]) :
-  build_message(app_name, app_url, build_url, git_commit, git_branch, started_by, ENV["WERCKER_RESULT"])
+  deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit, git_branch, started_by, result) :
+  build_message(app_name, app_url, build_url, git_commit, git_branch, started_by, result)
 
 notifier.channel = '#' + channel unless channel.empty?
 
