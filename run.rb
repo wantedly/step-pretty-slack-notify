@@ -41,11 +41,11 @@ def deploy?
 end
 
 def build_message(app_name, app_url, build_url, git_commit, git_branch, started_by, result)
-  "[[#{app_name}](#{app_url})] [build(#{git_commit[0,8]})](#{build_url}) of #{git_branch} by #{started_by} #{result}"
+  "[build](#{build_url}) (#{git_commit[0,8]}) for [#{app_name}](#{app_url}) by #{started_by} has #{result} on #{git_branch}"
 end
 
 def deploy_message(app_name, app_url, deploy_url, deploytarget_name, git_commit, git_branch, started_by, result)
-  "[[#{app_name}](#{app_url})] [deploy(#{git_commit[0,8]})](#{deploy_url}) of #{git_branch} to #{deploytarget_name} by #{started_by} #{result}"
+  "[deploy](#{deploy_url}) (#{git_commit[0,8]}) to #{deploytarget_name} for [#{app_name}](#{app_url}) by #{started_by} has #{result} on #{git_branch}"
 end
 
 def icon_url
