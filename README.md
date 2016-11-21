@@ -1,7 +1,7 @@
 # Slack Notify Step [![Docker Repository on Quay.io](https://quay.io/repository/wantedly/pretty-slack-notify/status "Docker Repository on Quay.io")](https://quay.io/repository/wantedly/pretty-slack-notify)
 Posts wercker build/deploy status to a [Slack Channel](https://slack.com/).
 
-![screenshot](https://raw.githubusercontent.com/wantedly/step-pretty-slack-notify/master/screenshot.png)
+![screenshot](screenshot.png)
 
 ## REQUIREMENTS
 
@@ -13,6 +13,7 @@ Options
 * `username` - The name of your bot. (default `Wercker`)
 * `branches` - Specific branches to notify. (regular expression)
 * `notify_on` - Allows you to specify to notify on `passed` or `failed`. (default all allows notify)
+* `passed_message`/`failed_message` - Allows you to define additional message on `passed`/`failed`. (You can use [slack formatting options](https://api.slack.com/docs/message-formatting))
 
 ## EXAMPLE USAGE
 posts build notification
@@ -62,7 +63,7 @@ build:
             branches: ^master$
 ```
 
-notify on specific failed only
+notify on failed build only
 
 ```yml
 build:
@@ -72,6 +73,18 @@ build:
         - wantedly/pretty-slack-notify:
             webhook_url: $SLACK_WEBHOOK_URL
             notify_on: "failed"
+```
+
+define additional message on passed build
+
+```yml
+build:
+    after-steps:
+        - install-packages:
+            packages: ruby
+        - wantedly/pretty-slack-notify:
+            webhook_url: $SLACK_WEBHOOK_URL
+            passed_message: yay :smile:
 ```
 
 ## CHANGELOG

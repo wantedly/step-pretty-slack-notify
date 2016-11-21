@@ -1,3 +1,8 @@
+## 0.3.0 (2016-11-22)
+
+* Refactor `run.rb`
+* Support to define additional message
+
 ## 0.2.14 (2015-12-07)
 Bugs Fixed:
 
