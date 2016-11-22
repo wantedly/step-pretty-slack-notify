@@ -1,3 +1,13 @@
+## 0.3.0 (2016-11-22)
+New Features:
+
+* Support to define additional message [#36](https://github.com/wantedly/step-pretty-slack-notify/pull/36)
+
+Changes:
+
+* Use latest icon [#36](https://github.com/wantedly/step-pretty-slack-notify/pull/36)
+* Change default message [#36](https://github.com/wantedly/step-pretty-slack-notify/pull/36)
+
 ## 0.2.14 (2015-12-07)
 Bugs Fixed:
 
