@@ -1,3 +1,8 @@
+## 0.3.1 (2016-11-22)
+Bugs Fixed:
+
+* Use `bundle install` to install dependencies [#37](https://github.com/wantedly/step-pretty-slack-notify/pull/37)
+
 ## 0.3.0 (2016-11-22)
 New Features:
 
