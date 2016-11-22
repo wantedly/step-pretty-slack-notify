@@ -14,13 +14,22 @@ if which ruby > /dev/null 2>&1 ; then
   echo "Install User: ${CURRENT_USER}"
   echo ""
 
+  cd $WERCKER_STEP_ROOT
 
   if [ "${CURRENT_USER}" = "${RUBY_OWNER}" ]; then
+    if ! which bundler > /dev/null 2>&1 ; then
+      gem install bundler
+    fi
+
     echo "Installing slack-notifier..."
-         gem install slack-notifier -v 1.2.1 --no-ri --no-rdoc
+    bundle install
   else
+    if ! which bundler > /dev/null 2>&1 ; then
+      sudo gem install bundler
+    fi
+
     echo "Installing slack-notifier as root..."
-    sudo gem install slack-notifier -v 1.2.1 --no-ri --no-rdoc
+    sudo bundle install
   fi
 
   $WERCKER_STEP_ROOT/run.rb
