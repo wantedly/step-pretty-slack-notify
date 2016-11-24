@@ -1,3 +1,8 @@
+## 0.3.2 (2016-11-24)
+Bugs Fixed:
+
+* Use `bundle exec` to execure script [#38](https://github.com/wantedly/step-pretty-slack-notify/pull/38)
+
 ## 0.3.1 (2016-11-22)
 Bugs Fixed:
 
