@@ -23,6 +23,8 @@ if which ruby > /dev/null 2>&1 ; then
 
     echo "Installing slack-notifier..."
     bundle install
+
+    bundle exec $WERCKER_STEP_ROOT/run.rb
   else
     if ! which bundler > /dev/null 2>&1 ; then
       sudo gem install bundler
@@ -30,9 +32,9 @@ if which ruby > /dev/null 2>&1 ; then
 
     echo "Installing slack-notifier as root..."
     sudo bundle install
-  fi
 
-  $WERCKER_STEP_ROOT/run.rb
+    sudo bundle exec $WERCKER_STEP_ROOT/run.rb
+  fi
 else
   # Support Docker Box
   if which docker > /dev/null 2>&1 ; then
