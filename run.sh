@@ -33,7 +33,7 @@ if which ruby > /dev/null 2>&1 ; then
     echo "Installing slack-notifier as root..."
     sudo bundle install
 
-    sudo bundle exec $WERCKER_STEP_ROOT/run.rb
+    sudo -E bundle exec $WERCKER_STEP_ROOT/run.rb
   fi
 else
   # Support Docker Box
