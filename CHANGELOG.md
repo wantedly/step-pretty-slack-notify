@@ -1,3 +1,8 @@
+## 0.3.3 (2016-12-01)
+Bugs Fixed:
+
+* Preserve environment variables with sudo [#41](https://github.com/wantedly/step-pretty-slack-notify/pull/41)
+
 ## 0.3.2 (2016-11-24)
 Bugs Fixed:
 
