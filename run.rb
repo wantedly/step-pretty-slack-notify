@@ -108,13 +108,14 @@ end
 # These environment variables are required/optional for pretty-slack-notify step.
 webhook_url    = ENV["WERCKER_PRETTY_SLACK_NOTIFY_WEBHOOK_URL"]    || ""
 channel        = ENV["WERCKER_PRETTY_SLACK_NOTIFY_CHANNEL"]        || ""
-username       = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]       || "Wercker"
+username       = ENV["WERCKER_PRETTY_SLACK_NOTIFY_USERNAME"]       || ""
 branches       = ENV["WERCKER_PRETTY_SLACK_NOTIFY_BRANCHES"]       || ""
 notify_on      = ENV["WERCKER_PRETTY_SLACK_NOTIFY_NOTIFY_ON"]      || ""
 passed_message = ENV["WERCKER_PRETTY_SLACK_NOTIFY_PASSED_MESSAGE"] || ""
 failed_message = ENV["WERCKER_PRETTY_SLACK_NOTIFY_FAILED_MESSAGE"] || ""
 icon_url       = "https://secure.gravatar.com/avatar/a08fc43441db4c2df2cef96e0cc8c045?s=140"
 
+username = "Wercker" if username.empty?
 abort "Please specify the your slack webhook url" if webhook_url.empty?
 
 build = Build.new
