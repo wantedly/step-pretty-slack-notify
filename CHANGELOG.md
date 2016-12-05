@@ -1,3 +1,8 @@
+## 0.3.4 (2016-12-02)
+Bugs Fixed:
+
+* Set default username correctly [#43](https://github.com/wantedly/step-pretty-slack-notify/pull/43)
+
 ## 0.3.3 (2016-12-01)
 Bugs Fixed:
 
