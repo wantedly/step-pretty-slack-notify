@@ -43,7 +43,7 @@ class Build
     when "github.com" then
       "https://#{@git_domain}/#{@git_owner}/#{@git_repo}/commit/#{@git_commit}"
     when "bitbucket.org" then
-      "https://#{@git_domain}/#{@git_owner}/#{@git_repo}/commit/#{@git_commit}"
+      "https://#{@git_domain}/#{@git_owner}/#{@git_repo}/commits/#{@git_commit}"
     else
       nil
     end
