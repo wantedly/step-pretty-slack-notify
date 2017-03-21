@@ -1,3 +1,8 @@
+## 0.3.5 (2017-03-21)
+Bugs Fixed:
+
+* Fix git_commit_url for bitbucket [#45](https://github.com/wantedly/step-pretty-slack-notify/pull/45)
+
 ## 0.3.4 (2016-12-02)
 Bugs Fixed:
 
